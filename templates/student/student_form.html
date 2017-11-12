@@ -1,0 +1,8 @@
+<form action="" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" name = 'continue' value="register and continue" />
+    <input type="submit" name = 'register' value="register" />
+</form>
+
+<a href="#" type=button onClick="javascript:history.go(-1);">back</a><br />
+<a href="{% url 'website:home' %}">Dashboard</a>

@@ -1,0 +1,17 @@
+{{ student.reg_id }}<br>
+{{ student.name }}<br>
+{{ student.father }}<br>
+{{ student.marhala }}<br>
+{{ student.reg_year }}<br>
+{{ student.is_rejected }}<br>
+<hr />
+
+{% for subject, number in results.items %}
+    {{ subject }} - {{ number }} <br />
+{% empty %}
+no result added
+{% endfor %}
+
+<hr />
+<a href="{% url 'website:student_update' reg_id=student.reg_id reg_year=student.reg_year %}">update student info</a><br>
+<a href="{% url 'website:result_update' reg_id=student.reg_id reg_year=student.reg_year %}">update result</a>
