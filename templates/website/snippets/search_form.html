@@ -1,10 +1,13 @@
 <form action="{% url 'website:student_detail_get' %}" method="get">
-    <input type="text" name="reg_id" placeholder="Registration ID" required>
-    <select required name="reg_year">
-        <option value="">Select Registration Year</option>
-        <option value="2016">2016</option>
-        <option value="2017" selected="selected">2017</option>
-        <option value="2018">2018</option>
-    </select>
-    <input type="submit" value="search" />
+    <div class="col-md-4 form-group">
+        <input type="text" name="reg_id" class="form-control" placeholder="Registration ID" required>
+        <select required name="reg_year" class="form-control" role="menu">
+            <option value="">Select Registration Year</option>
+            <option value="2016">2016</option>
+            <option value="2017" selected="selected">2017</option>
+            <option value="2018">2018</option>
+        </select>
+
+        <input type="submit" value="search" class="btn btn-default"/>
+    </div>
 </form>

@@ -129,12 +129,18 @@ def result_update(request, reg_id, reg_year):
     return render(request, 'result/update_form.html', context)
 
 
-def top_results(request, madrasa=None, marhala=None):
+def top_results(request):
     results = Result.objects.all().order_by('-average_num', '-total_num')
-    if marhala:
-        results = results.filter(marhala=marhala)
-    if madrasa:
-        results = results.filter(student__madrasa__icontains=madrasa)
+
+    # try to find marhala and madrasa on get method
+    # then filter results based on madrasa or marhala
+    marhala =  request.GET.get('marhala')
+    if request.GET.get('marhala'):
+        results = results.filter(student__marhala__icontains=marhala)
+
+    madrasa = request.GET.get('madrasa')
+    if request.GET.get('madrasa'):
+        results = results.filter(student__madrasa__name__icontains=madrasa)
 
     context = {
         'results':results[:100],

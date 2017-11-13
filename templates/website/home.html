@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    total madrasa: {{ total_madrasa }}<br />
-    total students: {{ total_student }}<br />
+    <br />
+    <h3>Total Madrasa: {{ total_madrasa }}</h3 >
+    <h3>Total Students: {{ total_student }}</h3 >
     <hr />
     search student result: {% include 'website/snippets/search_form.html' %}
     <br />
-    <a href="{% url 'website:top_results' %}">top results</a>
-    <hr />
+    <div ><a href="{% url 'website:top_results' %}" style="color:green" >Top Results</a></div>
 {% endblock %}

@@ -1,16 +1,44 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% for result in results %}
-    {{ forloop.counter }})
-    registration id: <strong>{{ result.student.reg_id }}</strong>,
-    registration year: <strong>{{ result.student.reg_year }}</strong>,
-    name: <strong>{{ result.student.name }}</strong>,
-    total num: <strong>{{ result.total_num }}</strong>,
-    average num: <strong>{{ result.average_num }}</strong>,
-    madrasa: <strong>{{ result.student.madrasa }}</strong>,
-    marhala: <strong>{{ result.student.marhala }}</strong>
-    <br />
-    <br />
-{% endfor %}
+    <div>
+        <form action="{% url 'website:top_results' %}" method="get">
+            <input type="text" name="madrasa" placeholder="madrasa">
+            <input type="text" name="marhala" placeholder="marhala">
+            <input type="submit" value="filter on">
+        </form>
+    </div>
+
+
+    <div class="table-responsive">
+        <table class="table table-hover table-white">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Registration ID</th>
+                <th scope="col">Registration Year</th>
+                <th scope="col">Name</th>
+                <th scope="col">Total num</th>
+                <th scope="col">Average num</th>
+                <th scope="col">Madrasa</th>
+                <th scope="col">Marhala</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for result in results %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }})</th>
+                    <td>{{ result.student.reg_id }}</td>
+                    <td>{{ result.student.reg_year }}</td>
+                    <td>{{ result.student.name }}</td>
+                    <td>{{ result.total_num }}</td>
+                    <td>{{ result.average_num }}</td>
+                    <td>{{ result.student.madrasa }}</td>
+                    <td>{{ result.student.marhala }}</td>
+                </tr>
+
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
