@@ -3,8 +3,7 @@
 {% block content %}
     <div>
         <form action="{% url 'website:top_results' %}" method="get">
-            <input type="text" name="madrasa" placeholder="madrasa">
-            <input type="text" name="marhala" placeholder="marhala">
+            {{ result_filter_form.as_table }}
             <input type="submit" value="filter on">
         </form>
     </div>

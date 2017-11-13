@@ -9,6 +9,7 @@ from madrasa.models import Madrasa
 
 from result.forms import ResultForm
 from student.forms import StudentForm
+from website.forms import ResultFilterForm
 
 
 def home(request):
@@ -142,7 +143,9 @@ def top_results(request):
     if request.GET.get('madrasa'):
         results = results.filter(student__madrasa__name__icontains=madrasa)
 
+    result_filter_form = ResultFilterForm(request.GET)
     context = {
+        'result_filter_form':result_filter_form,
         'results':results[:100],
     }
     return render(request, 'result/top_results.html', context)
