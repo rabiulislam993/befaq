@@ -2,12 +2,15 @@
 
 {% block content %}
 {% for result in results %}
-    id: {{ result.student.reg_id }},
-    name: {{ result.student.name }},
-    total: {{ result.total_num }},
-    average: {{ result.average_num }},
-    madrasa: {{ result.student.madrasa }},
-    marhala: {{ result.student.marhala }}
-    <hr />
+    {{ forloop.counter }})
+    registration id: <strong>{{ result.student.reg_id }}</strong>,
+    registration year: <strong>{{ result.student.reg_year }}</strong>,
+    name: <strong>{{ result.student.name }}</strong>,
+    total num: <strong>{{ result.total_num }}</strong>,
+    average num: <strong>{{ result.average_num }}</strong>,
+    madrasa: <strong>{{ result.student.madrasa }}</strong>,
+    marhala: <strong>{{ result.student.marhala }}</strong>
+    <br />
+    <br />
 {% endfor %}
 {% endblock %}

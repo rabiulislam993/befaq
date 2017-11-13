@@ -130,7 +130,7 @@ def result_update(request, reg_id, reg_year):
 
 
 def top_results(request, madrasa=None, marhala=None):
-    results = Result.objects.all().order_by('average_num', 'total_num')
+    results = Result.objects.all().order_by('-average_num', '-total_num')
     if marhala:
         results = results.filter(marhala=marhala)
     if madrasa:

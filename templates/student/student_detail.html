@@ -1,21 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{{ student.reg_id }}<br>
-{{ student.name }}<br>
-{{ student.father }}<br>
-{{ student.marhala }}<br>
-{{ student.madrasa }}<br>
-{{ student.reg_year }}<br>
-{{ student.is_rejected }}<br>
+<strong>Reg ID: </strong>{{ student.reg_id }}<br>
+<strong>Name: </strong>{{ student.name }}<br>
+<strong>Father: </strong>{{ student.father }}<br>
+<strong>Marhala: </strong>{{ student.marhala }}<br>
+<strong>Madrasa: </strong>{{ student.madrasa }}<br>
+<strong>Reg Year: </strong>{{ student.reg_year }}<br>
+{% if student.is_rejected %}<strong><i>REJECTED</i></strong>{% endif %}
 <hr />
 
 {% if results %}
 {% for subject, number in results.items %}
-    {{ subject }} - {{ number }} <br />
+    {{ subject }} = {{ number }} <br />
 {% endfor %}
-    total = {{ student.result.total_num }}<br />
-    average = {{ student.result.average_num }}<br />
+    <br />
+    <strong>total</strong> = {{ student.result.total_num }}<br />
+    <strong>average</strong> = {{ student.result.average_num }}<br />
 {% endif %}
 <hr />
 
