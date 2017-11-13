@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Max
 
+from madrasa.models import Madrasa
 
 REGISTRATION_YEARS = (
     ('2016', '2016'),
@@ -29,7 +30,7 @@ class Student(models.Model):
     name          = models.CharField(max_length=100)
     father        = models.CharField(max_length=100)
     address       = models.TextField(blank=True, null=True)
-    madrasa       = models.CharField(max_length=100)
+    madrasa       = models.ForeignKey(Madrasa, on_delete=models.CASCADE, related_name='students')
     marhala       = models.CharField(max_length=10,
                                      choices=MARHALA)
     registrar     = models.ForeignKey('auth.User', default=1)

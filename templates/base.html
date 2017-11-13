@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Befaq</title>
+</head>
+<body>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+
+        <a href="#" type=button onClick="javascript:history.go(-1);">back</a>
+        <a href="{% url 'website:home' %}">Home</a>
+        <a href="/admin">Dashboard</a>
+    </div>
+</body>
+</html>

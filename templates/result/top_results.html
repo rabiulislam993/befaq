@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for result in results %}
+    id: {{ result.student.reg_id }},
+    name: {{ result.student.name }},
+    total: {{ result.total_num }},
+    average: {{ result.average_num }},
+    madrasa: {{ result.student.madrasa }},
+    marhala: {{ result.student.marhala }}
+    <hr />
+{% endfor %}
+{% endblock %}

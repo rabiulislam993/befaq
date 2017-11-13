@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # custom apps
     'student',
     'result',
+    'madrasa',
     'website',
 ]
 

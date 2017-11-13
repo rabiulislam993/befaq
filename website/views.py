@@ -1,17 +1,26 @@
 from collections import OrderedDict
 
-from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.messages.views import messages
 
 from result.models import Result
 from student.models import Student
+from madrasa.models import Madrasa
 
 from result.forms import ResultForm
 from student.forms import StudentForm
 
 
 def home(request):
-    return HttpResponse('website home')
+    total_madrasa = Madrasa.objects.all().count()
+    total_student = Student.objects.all().count()
+
+    context = {
+        'total_madrasa':total_madrasa,
+        'total_student':total_student,
+    }
+    return render(request, 'website/home.html', context)
+
 
 def register_student(request):
     if request.method == 'POST':
@@ -36,7 +45,13 @@ def register_student(request):
     }
     return render(request, 'student/student_form.html', context)
 
-def student_detail(request, reg_id, reg_year):
+def student_detail(request, reg_id=None, reg_year=None):
+    # if reg id and reg year not sent on post method
+    # try to find them on get method
+    if not reg_id or not reg_year:
+        reg_id = request.GET.get('reg_id')
+        reg_year = request.GET.get('reg_year')
+
     student = get_object_or_404(Student, reg_id=reg_id, reg_year=reg_year)
     result = student.get_result()
     result_dict = OrderedDict()
@@ -112,3 +127,16 @@ def result_update(request, reg_id, reg_year):
         'form':form,
     }
     return render(request, 'result/update_form.html', context)
+
+
+def top_results(request, madrasa=None, marhala=None):
+    results = Result.objects.all().order_by('average_num', 'total_num')
+    if marhala:
+        results = results.filter(marhala=marhala)
+    if madrasa:
+        results = results.filter(student__madrasa__icontains=madrasa)
+
+    context = {
+        'results':results[:100],
+    }
+    return render(request, 'result/top_results.html', context)

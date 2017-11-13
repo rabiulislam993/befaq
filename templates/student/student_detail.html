@@ -1,17 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
 {{ student.reg_id }}<br>
 {{ student.name }}<br>
 {{ student.father }}<br>
 {{ student.marhala }}<br>
+{{ student.madrasa }}<br>
 {{ student.reg_year }}<br>
 {{ student.is_rejected }}<br>
 <hr />
 
+{% if results %}
 {% for subject, number in results.items %}
     {{ subject }} - {{ number }} <br />
-{% empty %}
-no result added
 {% endfor %}
-
+    total = {{ student.result.total_num }}<br />
+    average = {{ student.result.average_num }}<br />
+{% endif %}
 <hr />
-<a href="{% url 'website:student_update' reg_id=student.reg_id reg_year=student.reg_year %}">update student info</a><br>
-<a href="{% url 'website:result_update' reg_id=student.reg_id reg_year=student.reg_year %}">update result</a>
+
+{% endblock %}
