@@ -31,6 +31,14 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    # custom apps
+    'student',
+    'result',
+    'madrasa',
+    'website',
+    'api',
+
+    # builtin apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,11 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # custom apps
-    'student',
-    'result',
-    'madrasa',
-    'website',
+    # third party apps
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
