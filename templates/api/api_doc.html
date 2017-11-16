@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-md-6 offset-md-3">
+
+        <strong>API URLs: </strong>
+        <p><a href="result/">www.befaq.ml/api/result/</a> for single result,
+            <a href="result/top/">www.befaq.ml/api/result/top/</a> for top results list.
+        </p>
+
+
+        <strong>retrieve single result from get request: </strong>
+        <p>to retrieve a student result make a get request to
+            www.befaq.ml/api/result/ with tow arguments<br />
+            1) reg_id , send student registration ID in reg_id argument<br />
+            2) reg_year, send student registration Year in reg_year argument
+        </p>
+
+
+        <strong>retrieve single result from flat URL: </strong>
+        <p>to retrieve a student result make a get request to
+            www.befaq.ml/api/result/< reg_year >/< reg_id >/<br />
+            where reg_year is student's registration year and reg_id is student's registration ID<br />
+            example: go to www.befaq.ml/api/result/2017/2/ for retrieve result of
+            student whose registration ID is 2 and registration year is 2017
+        </p>
+
+
+        <strong>retrieve top results list: </strong>
+        <p>go to www.befaq.ml/api/result/top
+        </p>
+    </div>
+{% endblock %}
+
