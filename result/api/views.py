@@ -1,50 +1,49 @@
-from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.status import HTTP_404_NOT_FOUND, HTTP_400_BAD_REQUEST
+from rest_framework.status import HTTP_406_NOT_ACCEPTABLE
+from rest_framework.generics import RetrieveAPIView, ListAPIView
 
 from result.api.serializers import StudentResultSerializer, TopStudentResultsSerializer
-from result.models import Result
 from student.models import Student
 
 
-class ResultDetailAPIView(APIView):
-    def get(self, request, reg_year=None, reg_id=None,  format=None):
-        # first check if reg_id and reg_year provided by get method
-        # if not provided then try to grab from url
-        reg_year = request.GET.get('reg_year', reg_year)
-        reg_id = request.GET.get('reg_id', reg_id)
+@api_view(['get'])
+def api_home(self):
+    content = {'single_result':'To retrieve single result Go to www.befaq.ml/api/result/<id>/ where <id> is student registration ID',
+               'result_list':'To retrieve top result list Go to www.befaq.ml/api/result/top/',
+               'detail':'Learn Detail on www.befaq.ml/api/'}
+    return Response(content, HTTP_406_NOT_ACCEPTABLE)
 
-        # if reg_id and reg_year not provided on get method or in url
-        # then return bad request error
-        if not reg_id or not reg_year:
-            return Response({'error':'Registration ID or registration Year Missing. '
-                                     'Go to www.befaq.ml/api for API documentation.'}, HTTP_400_BAD_REQUEST)
 
-        # if reg_id and reg_year provided then try to find relative result
-        # from Student class, if not found then return 404 not found error
-        try:
-            result = Student.objects.get(reg_id=reg_id, reg_year=reg_year)
-        except:
-            return Response({'error':'result not found'}, HTTP_404_NOT_FOUND)
+class ResultDetailAPIView(RetrieveAPIView):
+    serializer_class = StudentResultSerializer
+    queryset = Student.objects.all()
+    lookup_field = 'id'
 
-        # serialize grabbed data and return as api Response
-        result = StudentResultSerializer(result)
-        return Response(result.data)
+class TopStudentResultsAPIView(ListAPIView):
+    serializer_class = TopStudentResultsSerializer
 
-class TopStudentResultsAPIView(APIView):
-    def get(self, request, format=None):
-        student_results = Student.objects.exclude(result__isnull=True).order_by('-result__average_num', '-result__total_num')
+    def get_queryset(self):
+        # retrieve all student object with result
+        queryset = Student.objects.all_with_result()
 
-        # try to find marhala and madrasa on get method
-        # then filter results based on madrasa or marhala
-        marhala = request.GET.get('marhala')
+        # filter student objects with get parameters if given.
+        # first filter them with reg_year, default 2018
+        reg_year = self.request.GET.get('reg_year', 2018)
+        queryset = queryset.filter(reg_year=int(reg_year))
+
+        # filter them with marhala if given
+        marhala = self.request.GET.get('marhala')
         if marhala:
-            student_results = student_results.filter(marhala__icontains=marhala)
+            queryset = queryset.filter(marhala__icontains=marhala)
 
-        madrasa = request.GET.get('madrasa')
+        # filter them with madrasa if givem
+        madrasa = self.request.GET.get('madrasa')
         if madrasa:
-            student_results = student_results.filter(madrasa__name__icontains=madrasa)
+            try: # try to find if the given 'madrasa' parameter is int type (for madrasa ID)
+                madrasa = int(madrasa) # convert madrasa id to integer type
+                queryset = queryset.filter(madrasa__id=madrasa)
+            except: # if madrasa not an int, then think of his as string (madrasa name)
+                queryset = queryset.filter(madrasa__name=madrasa)
 
-        serialized_results = TopStudentResultsSerializer(student_results, many=True)
-
-        return Response(serialized_results.data)
+        return queryset

@@ -1,34 +1,34 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="col-md-6 offset-md-3">
+    <div class="col-md-7 col-md-offset-2">
 
         <strong>API URLs: </strong>
-        <p><a href="result/">www.befaq.ml/api/result/</a> for single result,
-            <a href="result/top/">www.befaq.ml/api/result/top/</a> for top results list.
-        </p>
+        <p><a href="result/">www.befaq.ml/api/result/</a> for single result</p>
+        <p><a href="{% url 'result_api:top_results' %}">www.befaq.ml/api/result/top/</a> for top results list</p>
 
-
-        <strong>retrieve single result from get request: </strong>
+        <strong>Retrieve single result with Get request: </strong>
         <p>to retrieve a student result make a get request to
-            www.befaq.ml/api/result/ with tow arguments<br />
-            1) reg_id , send student registration ID in reg_id argument<br />
-            2) reg_year, send student registration Year in reg_year argument
-        </p>
-
-
-        <strong>retrieve single result from flat URL: </strong>
-        <p>to retrieve a student result make a get request to
-            www.befaq.ml/api/result/< reg_year >/< reg_id >/<br />
-            where reg_year is student's registration year and reg_id is student's registration ID<br />
-            example: go to www.befaq.ml/api/result/2017/2/ for retrieve result of
-            student whose registration ID is 2 and registration year is 2017
+            www.befaq.ml/api/result/&lt;ID&gt;/<br/>
+            where ID is student's registration ID</p>
+        <p>example: go to www.befaq.ml/api/result/2/ for retrieve result of
+            student whose registration ID is 2.
         </p>
 
 
         <strong>retrieve top results list: </strong>
-        <p>go to www.befaq.ml/api/result/top
+        <p>Go to <a href="{% url 'result_api:top_results' %}">www.befaq.ml/api/result/top/</a> for top results.</p>
+        <p>if you want to filter top results on Madrasa, Marhala or Registrations year then
+            parse them to get request parameters.</p>
+        <p>example: to retrieve Top result list of students whom Registration Year is 2018,
+            Madrasa is: Jamia Arabia Imdadu Uloom, Marhala is: Takmil.<br/>
+            Go to These URL:
+            <a href="{% url 'result_api:top_results' %}?madrasa=Jamia+Arabia+Imdadul+Uloom&amp;marhala=takmil&amp;reg_year=2018" >
+                www.befaq.ml/api/result/top/?madrasa=Jamia+Arabia+Imdadul+Uloom&amp;marhala=takmil&amp;reg_year=2018
+            </a>
         </p>
+        <p>You Can also submit Madrasa's Registraton ID instead Madrasa's Name</p>
+
     </div>
 {% endblock %}
 

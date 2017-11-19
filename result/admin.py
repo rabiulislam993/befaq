@@ -1,6 +1,11 @@
 from django.contrib import admin
 
-from .models import Result
+from result.models import Result
 
 
-admin.site.register(Result)
+
+class ResultAdmin(admin.ModelAdmin):
+    exclude = ['total_num','average_num','grade']
+    raw_id_fields = ('student',)
+
+admin.site.register(Result, ResultAdmin)

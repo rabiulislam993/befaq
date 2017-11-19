@@ -1,0 +1,45 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Befaq Result</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'result:result_search' %}">Search Result</a></li>
+                <li><a href="{% url 'result:top_results' %}">Top Results</a></li>
+
+                {% if request.user.is_authenticated %}
+                <li><a href="/admin/logout">Logout</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Menu <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Register Student</a></li>
+                        <li><a href="#">Add Result</a></li>
+                        <li><a href="#">Register Madrasa</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li class="dropdown-header">Update</li>
+                        <li><a href="#">Update Student</a></li>
+                        <li><a href="#">Update Madrasa</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                    <li><a href="/admin/login">Login</a></li>
+                {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/">Home</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="">Contact</a></li>
+                <li><a href="{% url 'api_doc' %}">API</a>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
+</nav>

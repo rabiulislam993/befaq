@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-5 col-md-offset-2">
+            <strong>Reg ID: </strong>{{ student.id }}<br>
+            <strong>Name: </strong>{{ student.name }}<br>
+            <strong>Father: </strong>{{ student.father }}<br>
+            <strong>Adress: </strong>{{ student.address }}<br>
+            {% if not student.is_active %}<strong><i>Deactivated</i></strong>{% endif %}
+        </div>
+        <div class="col-md-5">
+            <strong>Reg Year: </strong>{{ student.reg_year }}<br>
+            <strong>Marhala: </strong>{{ student.marhala }}<br>
+            <strong>Madrasa: </strong>{{ student.madrasa }}<br>
+            <strong>Markaz: </strong>{{ student.markaz }}<br>
+        </div>
+        <br/>
+
+        <div class="col-md-8 col-md-offset-2">
+        <hr />
+            <h3>Result</h3>
+            <div class="table-responsive">
+                <table class="table table-hover table-white">
+                    <thead>
+                    <tr>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Number</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for subject, number in result.items %}
+                        <tr>
+                            <td>{{ subject }}</td>
+                            <td>{{ number }}</td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <th>Total Number</th>
+                        <td><strong>{{ student.result.total_num }}</strong></td>
+                    </tr>
+                    <tr>
+                        <th>Average Number</th>
+                        <td><strong>{{ student.result.average_num }}</strong></td>
+                    </tr>
+                    <tr>
+                        <th>Grade</th>
+                        <td><strong>{{ student.result.grade }}</strong></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
