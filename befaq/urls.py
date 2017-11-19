@@ -22,5 +22,5 @@ urlpatterns = [
     url(r'^api/', include('api.urls')),
     url(r'^result/', include('result.urls')),
 
-    url(r'^$', RedirectView.as_view(url='/result', permanent=True))
+    url(r'^$', RedirectView.as_view(url='/result', permanent=False))
 ]
