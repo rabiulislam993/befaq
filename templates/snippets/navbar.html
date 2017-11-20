@@ -16,20 +16,28 @@
                 <li><a href="{% url 'result:top_results' %}">Top Results</a></li>
 
                 {% if request.user.is_authenticated %}
-                <li><a href="/admin/logout">Logout</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">Menu <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Register Student</a></li>
-                        <li><a href="#">Add Result</a></li>
-                        <li><a href="#">Register Madrasa</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">Update</li>
-                        <li><a href="#">Update Student</a></li>
-                        <li><a href="#">Update Madrasa</a></li>
-                    </ul>
-                </li>
+                    <li><a href="/admin/logout">Logout</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Register<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Register Student</a></li>
+                            <li><a href="#">Add Result</a></li>
+                            <li><a href="{% url 'madrasa:madrasa_add' %}">Add Madrasa</a></li>
+{#                            <li role="separator" class="divider"></li>#}
+{#                            <li class="dropdown-header">Update</li>#}
+{#                            <li><a href="#">Update Student</a></li>#}
+{#                            <li><a href="#">Update Madrasa</a></li>#}
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">List<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">All Students</a></li>
+                            <li><a href="{% url 'madrasa:madrasa_list' %}">All Madrasa</a></li>
+                        </ul>
+                    </li>
                 {% else %}
                     <li><a href="/admin/login">Login</a></li>
                 {% endif %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <strong>Registration ID: </strong>{{ madrasa.id }}<br/>
+            <strong>Name: </strong>{{ madrasa.name }}<br/>
+            <strong>address: </strong>{{ madrasa.address }}<br/>
+            This madrasa is <strong>{% if not  madrasa.is_markaz %}Not {% endif %}Markaz</strong>.
+
+            <br/>
+            <hr/>
+            <p><a href="{% url 'madrasa:madrasa_update' pk=madrasa.pk %}">Update Madrasa Info.</a>
+            <p><a href="{% url 'madrasa:madrasa_list' %}">All Madrasa</a>
+            </p>
+        </div>
+    </div>
+{% endblock %}

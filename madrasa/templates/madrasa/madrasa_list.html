@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-md-10 col-md-offset-1">
+        <div class="table-responsive">
+            <table class="table table-hover table-white">
+                <thead>
+                <tr>
+                    <th scope="col">Reg. ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">is Marhala</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for madrasa in madrasa_list %}
+                    <tr>
+                        <th scope="row">{{ madrasa.id }}</th>
+                        <td><a href="{% url 'madrasa:madrasa_detail' pk=madrasa.pk %}">
+                            {{ madrasa.name }}
+                        </a></td>
+                        <td>{{ madrasa.address }}</td>
+                        <td>
+                            {% if madrasa.is_markaz %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <p>No Madrasa Registered yet.</p>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
