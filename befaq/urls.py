@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^result/', include('result.urls')),
     url(r'^madrasa/', include('madrasa.urls')),
 
-    url(r'^$', RedirectView.as_view(url='/result', permanent=True))
+    url(r'^$', RedirectView.as_view(url='/result', permanent=False))
 ]
