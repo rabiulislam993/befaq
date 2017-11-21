@@ -27,6 +27,36 @@ def result_search(request):
     }
     return render(request, 'result/result_search.html', context)
 
+def select_student_to_add_result(request):
+    context = {} # initialize context
+    if request.method == 'POST':
+        form = SearchResultForm(request.POST)
+        if form.is_valid():
+            id = form.cleaned_data.get('id')
+            context['student_id'] = id
+            # checking if the student of given id already exists or not
+            student = Student.objects.filter(id=id)
+            if student.exists():
+                # checking if the student's result already exists or not
+                result_exists = Result.objects.filter(student__id=id).exists()
+                if result_exists:
+                    # if result already exists then send this information
+                    context['result_exists']=True
+                # if student of given id is exists and his result not exists
+                # then go to add result page for adding new result for this student
+                else:
+                    return redirect(reverse('result:add_result', kwargs={'id': id}))
+            else:# if student not exists then send this information
+                context['student_not_exists']=True
+    else:
+        form = SearchResultForm()
+
+    context['form']=form
+    return render(request, 'result/select_student_to_add_result.html', context)
+
+
+def add_result(request, id):
+    pass
 
 def result_detail(request, id=None):
     result = get_object_or_404(Result, student__id=id)
