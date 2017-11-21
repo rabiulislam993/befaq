@@ -30,6 +30,7 @@
                         <th scope="col">Marhala</th>
                         <th scope="col">Total num</th>
                         <th scope="col">Average num</th>
+                        <th scope="col">full Result</th>
 
                     </tr>
                     </thead>
@@ -39,11 +40,18 @@
                             <th scope="row">{{ forloop.counter }})</th>
                             <td>{{ result.student.id }}</td>
                             <td>{{ result.student.reg_year }}</td>
-                            <td>{{ result.student.name }}</td>
-                            <td>{{ result.student.madrasa }}</td>
+                            <td><a href="{% url 'student:student_detail' pk=result.student.pk %}">
+                                {{ result.student.name }}</a>
+                            </td>
+                            <td>
+                                <a href="{% url 'madrasa:madrasa_detail' pk=result.student.madrasa.pk %}">{{ result.student.madrasa }}</a>
+                            </td>
                             <td>{{ result.student.marhala }}</td>
                             <td>{{ result.total_num }}</td>
                             <td>{{ result.average_num }}</td>
+                            <td><a href="{% url 'result:result_detail' id=result.student.id %}">Result</a>
+                            </td>
+
 
                         </tr>
 

@@ -5,7 +5,6 @@ from django.views.generic import (CreateView,
                                   ListView)
 
 from .models import Madrasa
-from .forms import MadrasaCreateUpdateForm
 
 
 class MadrasaDetail(DetailView):

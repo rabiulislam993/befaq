@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^api/', include('api.urls')),
     url(r'^result/', include('result.urls')),
     url(r'^madrasa/', include('madrasa.urls')),
+    url(r'^student/', include('student.urls')),
 
     url(r'^$', RedirectView.as_view(url='/result', permanent=False))
 ]

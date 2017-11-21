@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-md-10 col-md-offset-1">
+        <div class="table-responsive">
+            <table class="table table-hover table-white">
+                <thead>
+                <tr>
+                    <th scope="col">Reg. ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Father</th>
+                    <th scope="col">Marhala</th>
+                    <th scope="col">Madrasa</th>
+                    <th scope="col">Reg Year</th>
+                    <th scope="col">Registrar</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Is Active</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for student in student_list %}
+                    <tr>
+                        <th scope="row">{{ student.id }}</th>
+                        <td><a href="{% url 'student:student_detail' pk=student.pk %}">
+                            {{ student.name }}
+                        </a></td>
+                        <td>{{ student.father }}</td>
+                        <td>{{ student.marhala }}</td>
+                        <td>
+                            <a href="{% url 'madrasa:madrasa_detail' pk=student.madrasa.pk %}">{{ student.madrasa }}</a>
+                        </td>
+                        <td>{{ student.reg_year }}</td>
+                        <td>{{ student.registrar }}</td>
+                        <td>{{ student.address }}</td>
+                        <td>
+                            {% if student.is_active %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% empty %}
+                    <p>No Student Registered yet.</p>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

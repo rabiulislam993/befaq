@@ -64,7 +64,7 @@ class Student(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('result:result_detail', kwargs={'id':self.id})
+        return reverse('student:student_detail', kwargs={'pk':self.pk})
 
     def get_subject_list(self):
         subject_list = SUBJECT_LIST[self.marhala]

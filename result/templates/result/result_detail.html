@@ -12,7 +12,7 @@
         <div class="col-md-5">
             <strong>Reg Year: </strong>{{ student.reg_year }}<br>
             <strong>Marhala: </strong>{{ student.marhala }}<br>
-            <strong>Madrasa: </strong>{{ student.madrasa }}<br>
+            <strong>Madrasa: </strong><a href="{% url 'madrasa:madrasa_detail' pk=student.madrasa.pk %}">{{ student.madrasa }}</a> <br>
             <strong>Markaz: </strong>{{ student.markaz }}<br>
         </div>
         <br/>
