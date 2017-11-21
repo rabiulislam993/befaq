@@ -16,7 +16,7 @@
                 <li><a href="{% url 'result:top_results' %}">Top Results</a></li>
 
                 {% if request.user.is_authenticated %}
-                    <li><a href="/admin/logout">Logout</a></li>
+                    <li><a href="{% url 'logout' %}?next={{ request.path|urlencode }}">Logout</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Register<span class="caret"></span></a>
@@ -39,7 +39,7 @@
                         </ul>
                     </li>
                 {% else %}
-                    <li><a href="/admin/login">Login</a></li>
+                    <li><a href="{% url 'login' %}?next={{ request.path|urlencode }}">Login</a></li>
                 {% endif %}
             </ul>
             <ul class="nav navbar-nav navbar-right">

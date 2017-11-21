@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth.views import login, logout
 from django.views.generic import RedirectView
 
 urlpatterns = [
+    url(r'^login/$', login, {'template_name': 'login.html'}, name='login'),
+    url(r'^logout/$', logout, {'next_page': '/'}, name='logout'),
     url(r'^admin/', admin.site.urls),
+
     url(r'^api/', include('api.urls')),
     url(r'^result/', include('result.urls')),
     url(r'^madrasa/', include('madrasa.urls')),
