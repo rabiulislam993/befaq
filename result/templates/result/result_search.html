@@ -3,7 +3,7 @@
 {% block content %}
     <div class="col-md-8 col-md-offset-2">
         <div class="form-group">
-            <form action="" method="get" class="form-inline">
+            <form action="" method="post" class="form-inline">{% csrf_token %}
                 {{ form.as_table }}
                 <input type="submit" value="search" class="btn btn-default"/>
             </form>
@@ -11,6 +11,6 @@
         <br/>
         <hr/>
         <h4>Total Registered Students: {{ total_student }}</h4>
-        <h4>Total Registered Madrasa: {{  total_madrasa }}</h4>
+        <h4>Total Registered Madrasa: {{ total_madrasa }}</h4>
     </div>
 {% endblock %}

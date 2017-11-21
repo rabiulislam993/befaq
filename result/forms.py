@@ -1,8 +1,11 @@
 from django import forms
+from django.core.validators import MinValueValidator
 
 
 class SearchResultForm(forms.Form):
     id = forms.IntegerField(label="Student's ID",
+                            required=True,
+                            validators=[MinValueValidator(1)],
                             widget=forms.TextInput(attrs={'class': 'form-control'}))
 
 
@@ -25,8 +28,8 @@ class ResultFilterForm(forms.Form):
 
     madrasa = forms.CharField(required=False,
                               label='Madrasa',
-                              widget=forms.TextInput(attrs={'class':'form-control',
-                                                            'placeholder':'Name or ID'}))
+                              widget=forms.TextInput(attrs={'class': 'form-control',
+                                                            'placeholder': 'Name or ID'}))
 
     marhala = forms.ChoiceField(choices=MARHALA,
                                 label='Marhala',

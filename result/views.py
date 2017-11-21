@@ -11,10 +11,14 @@ def result_search(request):
     total_madrasa = Madrasa.objects.all().count()
     total_student = Student.objects.all().count()
 
-    form = SearchResultForm(request.POST or None)
-    id = request.GET.get('id')
-    if id:
-        return redirect(reverse('result:result_detail', kwargs={'id': int(id)}))
+    if request.method == 'POST':
+        form = SearchResultForm(request.POST)
+        if form.is_valid():
+            id = form.cleaned_data.get('id')
+            return redirect(reverse('result:result_detail', kwargs={'id': id}))
+
+    else:
+        form = SearchResultForm()
 
     context = {
         'form': form,
@@ -44,24 +48,33 @@ def top_results(request):
 
     # try to find marhala and madrasa on get method
     # then filter results based on madrasa or marhala
+    filter_info = [] # show filter information as message on top results page
     marhala = request.GET.get('marhala')
     if request.GET.get('marhala'):
         results = results.filter(student__marhala__icontains=marhala)
+        filter_info.append('Marhala: {}'.format(marhala)) # include marhala into filter info
 
     madrasa = request.GET.get('madrasa')
     if request.GET.get('madrasa'):
         try:
-            madrasa = int(madrasa)
-            results = results.filter(student__madrasa__id=madrasa)
+            madrasa_id = int(madrasa)
+            results = results.filter(student__madrasa__id=madrasa_id)
+            filter_info.append('Madrasa ID: {}'.format(madrasa_id)) # include madrasa id into filter info
         except:
             results = results.filter(student__madrasa__name__icontains=madrasa)
+            filter_info.append('Madrasa: {}'.format(madrasa)) # include madrasa name into filter info
 
     reg_year = request.GET.get('reg_year', 2018)
     results = results.filter(student__reg_year=int(reg_year))
+    filter_info.append('Year: {}'.format(reg_year)) # include registration Year into filter info
+
+    # convert filter_info list to comma separated String
+    filter_info = ', '.join(filter_info)
 
     result_filter_form = ResultFilterForm(request.GET or None)
     context = {
         'result_filter_form': result_filter_form,
-        'results': results[:40],
+        'filter_info':filter_info,
+        'results': results[:40], # always return top 40 results
     }
     return render(request, 'result/top_results.html', context)

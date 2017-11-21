@@ -9,6 +9,9 @@
                     <input type="submit" value="filter" class="btn btn-info">
                 </form>
                 <br/><br/>
+                {% if filter_info %}
+                    <p class="bg-info">Top Results of: {{ filter_info }}</p>
+                {% endif %}
                 <hr/>
             </div>
         </div>
