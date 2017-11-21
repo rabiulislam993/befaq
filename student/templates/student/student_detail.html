@@ -9,26 +9,33 @@
                 <strong>Father: </strong>{{ student.father }}<br>
                 <strong>Adress: </strong>{{ student.address }}<br>
                 <strong>is Active: </strong>{% if student.is_active %}Yes{% else %}No{% endif %}
-            </div><br />
+            </div>
+            <br/>
 
             <div>
                 <strong>Reg Year: </strong>{{ student.reg_year }}<br>
                 <strong>Marhala: </strong>{{ student.marhala }}<br>
                 <strong>Madrasa: </strong>{{ student.madrasa }}<br>
                 <strong>Markaz: </strong>{{ student.markaz }}<br/>
-            </div><br />
-            <div>
-                <strong>Registrar: </strong>{{ student.registrar }}<br>
-                <strong>Registered at: </strong>{{ student.registered_at }}<br>
-                <strong>Updated at: </strong>{{ student.updated_at }}<br>
             </div>
             <br/>
+
+            {% if request.user.is_authenticated %}
+                <div>
+                    <strong>Registrar: </strong>{{ student.registrar }}<br>
+                    <strong>Registered at: </strong>{{ student.registered_at }}<br>
+                    <strong>Updated at: </strong>{{ student.updated_at }}<br>
+                </div><br/>
+            {% endif %}
+
             <hr/>
             {% if student.result %}
                 <p><a href="{% url 'result:result_detail' id=student.id %}">View Result of this Student</a></p><br/>
             {% endif %}
-            <p><a href="{% url 'student:student_update' pk=student.id %}">Update Student Info.</a></p>
-            <p><a href="{% url 'student:student_list' %}">All Students</a></p>
+            {% if request.user.is_authenticated %}
+                <p><a href="{% url 'student:student_update' pk=student.id %}">Update Student Info.</a></p>
+                <p><a href="{% url 'student:student_list' %}">All Students</a></p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

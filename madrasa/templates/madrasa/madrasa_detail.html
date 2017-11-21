@@ -10,9 +10,11 @@
 
             <br/>
             <hr/>
-            <p><a href="{% url 'madrasa:madrasa_update' pk=madrasa.pk %}">Update Madrasa Info.</a>
-            <p><a href="{% url 'madrasa:madrasa_list' %}">All Madrasa</a>
-            </p>
+
+            {% if request.user.is_authenticated %}
+                <p><a href="{% url 'madrasa:madrasa_update' pk=madrasa.pk %}">Update Madrasa Info.</a>
+                <p><a href="{% url 'madrasa:madrasa_list' %}">All Madrasa</a></p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

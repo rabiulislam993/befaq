@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (CreateView,
                                   DetailView,
                                   UpdateView,
@@ -11,12 +11,12 @@ class StudentDetail(DetailView):
     template_name = 'student/student_detail.html'
 
 
-class StudentList(ListView):
+class StudentList(LoginRequiredMixin, ListView):
     model = Student
     template_name = 'student/student_list.html'
 
 
-class StudentCreate(CreateView):
+class StudentCreate(LoginRequiredMixin, CreateView):
     model = Student
     fields = ['name',
               'father',
@@ -29,7 +29,7 @@ class StudentCreate(CreateView):
     template_name = 'student/student_create_form.html'
 
 
-class StudentUpdate(UpdateView):
+class StudentUpdate(LoginRequiredMixin, UpdateView):
     model = Student
     fields = ['name',
               'father',
