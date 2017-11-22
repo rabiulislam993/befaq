@@ -20,7 +20,8 @@ class AddResultForm(forms.Form):
                                                                      validators=[MinValueValidator(0),
                                                                                  MaxValueValidator(100)],
                                                                      widget=forms.TextInput(
-                                                                         attrs={'class': 'form-control'}))
+                                                                         attrs={'class': 'form-control',
+                                                                                }))
 
     def get_results(self):
         results = {}

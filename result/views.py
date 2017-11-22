@@ -1,4 +1,6 @@
 from collections import OrderedDict
+
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 
@@ -29,6 +31,7 @@ def result_search(request):
     return render(request, 'result/result_search.html', context)
 
 
+@login_required
 def select_student_to_add_result(request):
     context = {}  # initialize context
     if request.method == 'POST':
@@ -57,6 +60,7 @@ def select_student_to_add_result(request):
     return render(request, 'result/select_student_to_add_result.html', context)
 
 
+@login_required
 def add_result(request, id):
     student = get_object_or_404(Student, id=id)
     # if this student already have result then raise 404 error
@@ -73,6 +77,9 @@ def add_result(request, id):
         # and add current student to this result.
         Result.objects.create(student=student, **subject_result_dict)
         # after successfully create result, return to student's result page
+        # or to new result add page, if submitted 'save and add new result' button
+        if 'add_another' in request.POST:
+            return redirect('result:select_student_to_add_result')
         return redirect(reverse('result:result_detail', kwargs={'id': student.id}))
 
     context = {'add_result_form': add_result_form,

@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-md-5 col-md-offset-2">
             <strong>Reg ID: </strong>{{ student.id }}<br>
-            <strong>Name: </strong>{{ student.name }}<br>
+            <strong>Name: </strong><a href="{% url 'student:student_detail' pk=student.pk %}">{{ student.name }}</a> <br>
             <strong>Father: </strong>{{ student.father }}<br>
             <strong>Adress: </strong>{{ student.address }}<br>
             {% if not student.is_active %}<strong><i>Deactivated</i></strong>{% endif %}
