@@ -25,7 +25,7 @@ class TopStudentResultsAPIView(ListAPIView):
 
     def get_queryset(self):
         # retrieve all student object with result
-        queryset = Student.objects.all_with_result()
+        queryset = Student.objects.with_result()
 
         # filter student objects with get parameters if given.
         # first filter them with reg_year, default 2018

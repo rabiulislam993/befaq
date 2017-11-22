@@ -15,6 +15,11 @@ class StudentList(LoginRequiredMixin, ListView):
     model = Student
     template_name = 'student/student_list.html'
 
+class StudentWithoutResultList(LoginRequiredMixin, ListView):
+    template_name = 'student/student_list.html'
+    def get_queryset(self):
+        return Student.objects.without_result()
+
 
 class StudentCreate(LoginRequiredMixin, CreateView):
     model = Student

@@ -32,9 +32,14 @@ SUBJECT_LIST = {
 
 
 class StudentManager(models.Manager):
-    def all_with_result(self):
+    def with_result(self):
         students_with_result = self.filter(result__isnull=False)
         return students_with_result
+
+    def without_result(self):
+        students_with_result = self.filter(result__isnull=True)
+        return students_with_result
+
 
 class Student(models.Model):
     name          = models.CharField(max_length=100)

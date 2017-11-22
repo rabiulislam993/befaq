@@ -21,7 +21,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Register<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{% url 'student:student_add' %}">Register Student</a></li>
+                            <li><a href="{% url 'student:student_add' %}">Add Student</a></li>
                             <li><a href="{% url 'result:select_student_to_add_result' %}">Add Result</a></li>
                             <li><a href="{% url 'madrasa:madrasa_add' %}">Add Madrasa</a></li>
 {#                            <li role="separator" class="divider"></li>#}
@@ -35,6 +35,8 @@
                            aria-expanded="false">List<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href=" {% url 'student:student_list' %}">All Students</a></li>
+                            <li><a href=" {% url 'student:student_without_result' %}">Students Without Results</a></li>
+                            <li role="separator" class="divider"></li>
                             <li><a href="{% url 'madrasa:madrasa_list' %}">All Madrasa</a></li>
                         </ul>
                     </li>
