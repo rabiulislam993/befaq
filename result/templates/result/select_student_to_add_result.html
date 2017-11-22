@@ -2,16 +2,17 @@
 
 {% block content %}
     <div class="col-md-8 col-md-offset-2">
+    <h4>Enter student ID to set result...</h4>
         <div class="form-group">
             <form action="" method="post" class="form-inline">{% csrf_token %}
                 {{ form.as_table }}
-                <input type="submit" value="search" class="btn btn-default"/>
+                <input type="submit" value="add result" class="btn btn-default"/>
             </form>
         </div>
         {% if result_exists %}
             <div>
-                <p class="bg-warning">Result of Student ID: {{ student_id }} already exists.<br/></p>
-                <a href="{% url 'result:result_detail' id=student_id %}">View Result</a>
+                <p class="bg-warning">Result of Student ID: {{ student_id }} already exists.
+                <a href="{% url 'result:result_detail' id=student_id %}">View Result</a></p>
             </div>
         {% endif %}
 

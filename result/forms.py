@@ -1,5 +1,5 @@
 from django import forms
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class SearchResultForm(forms.Form):
@@ -7,6 +7,27 @@ class SearchResultForm(forms.Form):
                             required=True,
                             validators=[MinValueValidator(1)],
                             widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+
+class AddResultForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        subject_list = kwargs.pop('subject_list')
+        super(AddResultForm, self).__init__(*args, **kwargs)
+
+        for i, subject in enumerate(subject_list, 1):
+            self.fields['subject_{}'.format(i)] = forms.IntegerField(label=subject,
+                                                                     required=True,
+                                                                     validators=[MinValueValidator(0),
+                                                                                 MaxValueValidator(100)],
+                                                                     widget=forms.TextInput(
+                                                                         attrs={'class': 'form-control'}))
+
+    def get_results(self):
+        results = {}
+        for name, value in self.cleaned_data.items():
+            if name.startswith('subject_'):
+                results[name] = value
+        return results
 
 
 class ResultFilterForm(forms.Form):
