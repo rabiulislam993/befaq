@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     # third party apps
     'rest_framework',
+    'markdownify',
 
 ]
 
@@ -141,3 +142,6 @@ DATABASES['default'].update(db_from_env)
 # login/logout/password change settings
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
+
+# markdownify settings
+MARKDOWNIFY_BLEACH = False

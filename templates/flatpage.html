@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load markdownify %}
 
 {% block title %}{{ flatpage.title }} | {{ block.super }}{% endblock %}
 
 {% block content %}
     <div class="col-md-8 col-md-offset-2">
-        {{ flatpage.content }}
+        {{ flatpage.content|markdownify|safe }}
     </div>
 {% endblock %}
