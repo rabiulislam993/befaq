@@ -63,7 +63,7 @@ class Student(models.Model):
     registrar     = models.ForeignKey('auth.User', default=1)
     registered_at = models.DateTimeField(auto_now_add=True)
     updated_at    = models.DateTimeField(auto_now=True)
-    is_active    = models.BooleanField(default=True)
+    is_active    = models.BooleanField(default=True, help_text='Active by Default')
 
     objects       = StudentManager()
 
