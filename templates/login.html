@@ -5,6 +5,12 @@
 {% block content %}
     <div class="col-md-4 col-md-offset-4">
         <div class="form-group">
+            <p class="help-block">
+               Username: admin
+            </p>
+            <p class="help-block">
+               Password: $Up3r3cR37
+            </p>
             <form method="post">{% csrf_token %}
                 {{ form.as_p }}
                 <input type="hidden" name="next" value="{{ request.GET.next }}">
