@@ -91,3 +91,6 @@ class Student(models.Model):
         if self.madrasa.is_markaz:
             self.markaz = self.madrasa.name
         return super(Student, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['-registered_at','-updated_at']

@@ -28,8 +28,8 @@
                         <th scope="col">Name</th>
                         <th scope="col">Madrasa</th>
                         <th scope="col">Marhala</th>
-                        <th scope="col">Total num</th>
                         <th scope="col">Average num</th>
+                        <th scope="col">Grade</th>
                         <th scope="col">full Result</th>
 
                     </tr>
@@ -47,8 +47,8 @@
                                 <a href="{% url 'madrasa:madrasa_detail' pk=result.student.madrasa.pk %}">{{ result.student.madrasa }}</a>
                             </td>
                             <td>{{ result.student.marhala }}</td>
-                            <td>{{ result.total_num }}</td>
                             <td>{{ result.average_num }}</td>
+                            <td>{{ result.grade }}</td>
                             <td><a href="{% url 'result:result_detail' id=result.student.id %}">Result</a>
                             </td>
 
