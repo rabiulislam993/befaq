@@ -1,6 +1,7 @@
 from collections import OrderedDict
 
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 
@@ -76,6 +77,7 @@ def add_result(request, id):
         # if all results is valid then create new result object
         # and add current student to this result.
         Result.objects.create(student=student, **subject_result_dict)
+        messages.success(request, 'Result for Student ID: {} Successfully Added'.format(student.id))
         # after successfully create result, return to student's result page
         # or to new result add page, if submitted 'save and add new result' button
         if 'add_another' in request.POST:

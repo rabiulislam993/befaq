@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-md-6 col-md-offset-3">
+        <div class="form-group">
+            <form action="" method="post">{% csrf_token %}
+                {% for field in form %}
+                    {% if not forloop.last %}
+                        <div class="form-group">
+                            {% if field.errors %}
+                                {% for error in field.errors %}
+                                    <span style="color: red"> {{ error }} </span><br/>
+                                {% endfor %}
+                            {% endif %}
+                            <div class="input-group">
+                                <span class="input-group-addon"><b>{{ field.label }}</b></span>
+                                {{ field }}
+                            </div>
+                            <p class="help-block">{{ field.help_text }}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+
+                <div class="row col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-addon"><b>{{ form.is_active.label }}</b></span>
+                        <span class="input-group-addon">{{ form.is_active }}</span>
+                    </div>
+                    <p class="help-block">{{ form.is_active.help_text }}</p>
+                </div>
+
+                <br/><br/>
+                <input type="submit" value="Save" class="btn btn-default pull-right"/>
+            </form>
+        </div>
+    </div>
+{% endblock %}

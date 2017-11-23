@@ -1,4 +1,5 @@
 from django.shortcuts import reverse
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (CreateView,
                                   DetailView,
@@ -23,24 +24,33 @@ class StudentWithoutResultList(LoginRequiredMixin, ListView):
         return Student.objects.without_result()
 
 
-class StudentCreate(LoginRequiredMixin, CreateView):
+class StudentCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = StudentCreateForm
     template_name = 'student/student_create_form.html'
+
+    success_message = 'Student ID: %(id)s Successfully Created'
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            id=self.object.id,
+        )
 
     def get_success_url(self):
         if 'add_another' in self.request.POST:
             return reverse('student:student_add')
+        else:
+            return reverse('student:student_detail', kwargs={'pk':self.object.id})
 
 
 
-class StudentUpdate(LoginRequiredMixin, UpdateView):
+class StudentUpdate(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Student
-    fields = ['name',
-              'father',
-              'address',
-              'madrasa',
-              'marhala',
-              'markaz',
-              'reg_year',
-              'is_active']
-    template_name = 'student/student_create_form.html'
+    form_class = StudentCreateForm
+    template_name = 'student/student_update_form.html'
+
+    success_message = 'Student ID: %(id)s Successfully Updated'
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            id=self.object.id,
+        )
