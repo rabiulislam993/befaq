@@ -7,14 +7,14 @@
 
 
 #### Some Arabic words used in project
-- **madrasa: **school, college, varsity.
-- **marhala: **class, division, faculty.
-- **markaz: **exam's center
+**madrasa:** school, college, varsity.
+**marhala:** class, division, faculty.
+**markaz:** exam's center
 
 ------------
 
 
-####Features
+#### Features
 **Visitors can do:**
 
 + View Basic Info of Students and Madrasa
