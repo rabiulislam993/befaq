@@ -8,7 +8,9 @@
 
 #### Some Arabic words used in project
 **madrasa:** school, college, varsity.
-**marhala:** class, division, faculty.
+
+**marhala:** class, division
+
 **markaz:** exam's center
 
 ------------
@@ -38,7 +40,7 @@
 + View List of:
     * All Madrasa
 	* All Students
-	* All Students With out Results (result not added yet)
+	* All Students Without Results (result not added yet)
 
 
 ------------
